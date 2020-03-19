@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const request = require('request');
 const cheerio = require("cheerio");
-
+const port = process.env.PORT || 1212
 app.get('/covid19', (req, res) =>
 
     request("https://www.worldometers.info/coronavirus/", function (error, response, body) {
@@ -29,4 +29,4 @@ app.get('/covid19', (req, res) =>
     })
 )
 
-app.listen(1212, () => console.log(`App running on http://localhost:1212`))
+app.listen(port, () => console.log(`App running on http://localhost:${port}`))
