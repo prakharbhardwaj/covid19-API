@@ -25,6 +25,16 @@ app.get('/covid19', (req, res) =>
         let index = country.findIndex(p => p.country == "Total:")
         index += 1
         country = country.slice(0, index)
+        country.sort((a, b) => {
+            var keyA = a.totalCases.replace(/\,/g, '')
+            var keyB = b.totalCases.replace(/\,/g, '')
+            keyA = parseInt(keyA, 10)
+            keyB = parseInt(keyB, 10)
+            if (keyA > keyB) return -1;
+            if (keyA < keyB) return 1;
+            return 0;
+        })
+        country.push(country.shift())
         res.json(country);
     })
 )
