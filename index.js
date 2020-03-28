@@ -1,42 +1,13 @@
 const express = require('express')
 const app = express()
-const request = require('request');
-const cheerio = require("cheerio");
-const port = process.env.PORT || 1212
-app.get('/covid19', (req, res) =>
 
-    request("https://www.worldometers.info/coronavirus/", function (error, response, body) {
-        if (error) {
-            res.send(response.statusCode);
-        }
-        var country = [];
-        var $ = cheerio.load(body);
-        $('tbody>tr').each(function (index, element) {
-            country[index] = {};
-            country[index]['country'] = $(element).find('td:nth-child(1)').text().trim();
-            country[index]['totalCases'] = $(element).find('td:nth-child(2)').text().trim();
-            country[index]['newCases'] = $(element).find('td:nth-child(3)').text().trim();
-            country[index]['totalDeaths'] = $(element).find('td:nth-child(4)').text().trim();
-            country[index]['newDeaths'] = $(element).find('td:nth-child(5)').text().trim();
-            country[index]['totalRecovered'] = $(element).find('td:nth-child(6)').text().trim();
-            country[index]['activeCases'] = $(element).find('td:nth-child(7)').text().trim();
-            country[index]['seriousCritical'] = $(element).find('td:nth-child(8)').text().trim();
-        });
-        let index = country.findIndex(p => p.country == "Total:")
-        index += 1
-        country = country.slice(0, index)
-        country.sort((a, b) => {
-            var keyA = a.totalCases.replace(/\,/g, '')
-            var keyB = b.totalCases.replace(/\,/g, '')
-            keyA = parseInt(keyA, 10)
-            keyB = parseInt(keyB, 10)
-            if (keyA > keyB) return -1;
-            if (keyA < keyB) return 1;
-            return 0;
-        })
-        country.push(country.shift())
-        res.json(country);
-    })
-)
+const port = process.env.PORT || 1212
+const datascrap = require('./datascrap')
+const sorting = require('./sort')
+const india = require('./statewise')
+
+app.get('/covid19', datascrap.scrapdata)
+app.get('/covid19/sort', sorting.sortdata)
+// app.get('/covid19/statewise', india.statewise)
 
 app.listen(port, () => console.log(`App running on http://localhost:${port}`))
