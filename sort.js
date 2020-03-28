@@ -46,8 +46,8 @@ module.exports.sortdata = function (req, res) {
                 country.sort((a, b) => {
                     var keyA = a.totalDeaths.replace(/\,/g, '')
                     var keyB = b.totalDeaths.replace(/\,/g, '')
-                    keyA = parseInt(keyA, 10)
-                    keyB = parseInt(keyB, 10)
+                    keyA = parseInt(keyA, 10) || 0
+                    keyB = parseInt(keyB, 10) || 0
                     if (keyA > keyB) return -1;
                     if (keyA < keyB) return 1;
                     return 0;
@@ -59,8 +59,8 @@ module.exports.sortdata = function (req, res) {
                 country.sort((a, b) => {
                     var keyA = a.totalRecovered.replace(/\,/g, '')
                     var keyB = b.totalRecovered.replace(/\,/g, '')
-                    keyA = parseInt(keyA, 10)
-                    keyB = parseInt(keyB, 10)
+                    keyA = parseInt(keyA, 10) || 0
+                    keyB = parseInt(keyB, 10) || 0
                     if (keyA > keyB) return -1;
                     if (keyA < keyB) return 1;
                     return 0;
@@ -72,8 +72,8 @@ module.exports.sortdata = function (req, res) {
                 country.sort((a, b) => {
                     var keyA = a.newCases.replace(/\,/g, '')
                     var keyB = b.newCases.replace(/\,/g, '')
-                    keyA = parseInt(keyA, 10)
-                    keyB = parseInt(keyB, 10)
+                    keyA = parseInt(keyA, 10) || 0
+                    keyB = parseInt(keyB, 10) || 0
                     if (keyA > keyB) return -1;
                     if (keyA < keyB) return 1;
                     return 0;
