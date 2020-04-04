@@ -41,7 +41,7 @@ module.exports.scrapdata = function (req, res) {
                     country[index]['seriousCritical'] = $(element).find('td:nth-child(8)').text().trim();
                 });
                 let index = country.findIndex(p => p.country == "Total:")
-                index += 1
+                // index += 1
                 country = country.slice(0, index)
 
                 let indiaIndex = country.findIndex(p => p.country == "India")
