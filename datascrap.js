@@ -7,14 +7,13 @@ module.exports.scrapdata = function (req, res) {
         .then(res => res.json())
         .then(json => {
             let statewise = json.statewise[0]
-            let keyValue = json.key_values[0]
 
             covid19india = {
                 country: 'India',
                 totalCases: formatNumber(statewise.confirmed),
-                newCases: formatNumber(`+${keyValue.confirmeddelta}`),
+                newCases: formatNumber(`+${statewise.deltaconfirmed}`),
                 totalDeaths: formatNumber(statewise.deaths),
-                newDeaths: formatNumber(`+${keyValue.deceaseddelta}`),
+                newDeaths: formatNumber(`+${statewise.deltadeaths}`),
                 totalRecovered: formatNumber(statewise.recovered),
                 activeCases: formatNumber(statewise.active),
                 seriousCritical: ''
