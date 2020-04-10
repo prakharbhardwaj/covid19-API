@@ -62,7 +62,7 @@ module.exports.scrapdata = function (req, res) {
                     return 0;
                 })
                 country.push(country.shift())
-                res.json(country);
+                res.status(200).send(country)
             })
         })
 }
