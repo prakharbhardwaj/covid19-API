@@ -22,6 +22,7 @@ module.exports.statewise = function statewise(req, res) {
                     state[index]['activeCases'] = formatNumber($[index].active)
                     state[index]['seriousCritical'] = ''
                 }
+                state.push(state.shift())
                 res.status(200).send(state)
 
             })
