@@ -15,6 +15,7 @@ module.exports.statewise = function statewise(req, res) {
                     state[index] = {};
                     state[index]['state'] = formatNumber($[index].state)
                     state[index]['totalCases'] = formatNumber($[index].confirmed)
+                    state[index]['totalDeaths'] = formatNumber($[index].deaths)
                     state[index]['newDeaths'] = formatNumber(`+${$[index].deltadeaths}`)
                     state[index]['newCases'] = formatNumber(`+${$[index].deltaconfirmed}`)
                     state[index]['totalRecovered'] = formatNumber($[index].recovered)
