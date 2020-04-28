@@ -8,6 +8,7 @@ const searching = require('./search')
 const searchV2 = require('./search_v2')
 const india = require('./statewise')
 const news = require('./latest_news')
+const indiaV2 = require('./statewise_v2')
 
 app.get('/', (req, res) => {
     // res.send('<h1>Prka</h1>')
@@ -23,5 +24,6 @@ app.get('/covid19/search', searching.searchdata)
 app.get('/covid19/news', news.news)
 app.get('/covid19/statewise', india.statewise)
 app.get('/covid19/v2/search', searchV2.searchdata)
+app.get('/covid19/v2/statewise', indiaV2.statewise)
 
 app.listen(port, () => console.log(`App running on http://localhost:${port}`))
