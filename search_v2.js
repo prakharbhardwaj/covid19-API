@@ -73,7 +73,7 @@ module.exports.searchdata = function (req, res) {
                             newDeaths: formatNumber(`+${districtwise.delta.deceased}`),
                             totalRecovered: formatNumber(districtwise.recovered),
                             activeCases: formatNumber(districtwise.active),
-                            newRecovered: formatNumber(`+${districtwise.deltarecovered}`),
+                            newRecovered: formatNumber(`+${districtwise.delta.recovered}`),
                             seriousCritical: ''
                         }
                     }
