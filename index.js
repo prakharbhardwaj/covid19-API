@@ -5,6 +5,7 @@ const port = process.env.PORT || 1212
 const datascrap = require('./datascrap')
 const sorting = require('./sort')
 const searching = require('./search')
+const searchV2 = require('./search_v2')
 const india = require('./statewise')
 const news = require('./latest_news')
 
@@ -21,5 +22,6 @@ app.get('/covid19/sort', sorting.sortdata)
 app.get('/covid19/search', searching.searchdata)
 app.get('/covid19/news', news.news)
 app.get('/covid19/statewise', india.statewise)
+app.get('/covid19/v2/search', searchV2.searchdata)
 
 app.listen(port, () => console.log(`App running on http://localhost:${port}`))
