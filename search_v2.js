@@ -21,14 +21,14 @@ module.exports.searchdata = function (req, res) {
                     if (statewise == undefined) {
                         covid19india = {
                             country: qrycountry,
-                            totalCases: 0,
-                            newCases: 0,
-                            totalDeaths: 0,
-                            newDeaths: 0,
-                            totalRecovered: 0,
-                            activeCases: 0,
-                            newRecovered: 0,
-                            seriousCritical: 0
+                            totalCases: "0",
+                            newCases: "0",
+                            totalDeaths: "0",
+                            newDeaths: "0",
+                            totalRecovered: "0",
+                            activeCases: "0",
+                            newRecovered: "0",
+                            seriousCritical: "0"
                         }
                     } else {
                         covid19india = {
@@ -51,34 +51,49 @@ module.exports.searchdata = function (req, res) {
             fetch('https://api.covid19india.org/state_district_wise.json')
                 .then(res => res.json())
                 .then(json => {
-                    let districtwise = json[`${qryState}`]["districtData"][`${qrycountry}`]
-                    if (districtwise == undefined) {
-                        covid19india = {
-                            country: qrycountry,
-                            totalCases: 0,
-                            newCases: 0,
-                            totalDeaths: 0,
-                            newDeaths: 0,
-                            totalRecovered: 0,
-                            activeCases: 0,
-                            newRecovered: 0,
-                            seriousCritical: 0
+                    try {
+                        let districtwise = json[`${qryState}`]["districtData"][`${qrycountry}`]
+                        if (districtwise == undefined) {
+                            covid19india = {
+                                country: qrycountry,
+                                totalCases: "0",
+                                newCases: "0",
+                                totalDeaths: "0",
+                                newDeaths: "0",
+                                totalRecovered: "0",
+                                activeCases: "0",
+                                newRecovered: "0",
+                                seriousCritical: "0"
+                            }
+                        } else {
+                            covid19india = {
+                                country: qrycountry,
+                                totalCases: formatNumber(districtwise.confirmed),
+                                newCases: formatNumber(`+${districtwise.delta.confirmed}`),
+                                totalDeaths: formatNumber(districtwise.deceased),
+                                newDeaths: formatNumber(`+${districtwise.delta.deceased}`),
+                                totalRecovered: formatNumber(districtwise.recovered),
+                                activeCases: formatNumber(districtwise.active),
+                                newRecovered: formatNumber(`+${districtwise.delta.recovered}`),
+                                seriousCritical: ''
+                            }
                         }
-                    } else {
-                        covid19india = {
-                            country: qrycountry,
-                            totalCases: formatNumber(districtwise.confirmed),
-                            newCases: formatNumber(`+${districtwise.delta.confirmed}`),
-                            totalDeaths: formatNumber(districtwise.deceased),
-                            newDeaths: formatNumber(`+${districtwise.delta.deceased}`),
-                            totalRecovered: formatNumber(districtwise.recovered),
-                            activeCases: formatNumber(districtwise.active),
-                            newRecovered: formatNumber(`+${districtwise.delta.recovered}`),
-                            seriousCritical: ''
-                        }
+                        res.status(200).json(covid19india)
                     }
-
-                    res.status(200).json(covid19india)
+                    catch (e) {
+                        covid19india = {
+                            country: qrycountry,
+                            totalCases: "0",
+                            newCases: "0",
+                            totalDeaths: "0",
+                            newDeaths: "0",
+                            totalRecovered: "0",
+                            activeCases: "0",
+                            newRecovered: "0",
+                            seriousCritical: "0"
+                        }
+                        res.status(200).json(covid19india)
+                    }
                 })
             break;
         case 'WD':
