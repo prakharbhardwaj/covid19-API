@@ -1,6 +1,7 @@
 const request = require('request');
 const cheerio = require("cheerio");
 const fetch = require('node-fetch')
+const pr = require('./past_recovery.json')
 
 module.exports.scrapdata = function (req, res) {
     fetch('https://api.covid19india.org/data.json')
@@ -31,7 +32,7 @@ module.exports.scrapdata = function (req, res) {
                 var $ = cheerio.load(body);
                 $('div[id="nav-today"]').find('tbody>tr').each(function (index, element) {
                     const cont = $(element).find('td:nth-child(1)').text().trim()
-                    if (cont == 'North America' || cont == 'Europe' || cont == 'South America' || cont == 'Oceania' || cont == 'Africa' || cont == 'Asia') {
+                    if (cont == 'North America' || cont == 'Europe' || cont == 'South America' || cont == 'Oceania' || cont == 'Africa' || cont == 'Asia' || cont == '') {
                         console.log('Not included')
                     } else {
                         country[index] = {};
@@ -42,7 +43,7 @@ module.exports.scrapdata = function (req, res) {
                         country[index]['newDeaths'] = $(element).find('td:nth-child(5)').text().trim();
                         country[index]['totalRecovered'] = $(element).find('td:nth-child(6)').text().trim();
                         country[index]['activeCases'] = $(element).find('td:nth-child(7)').text().trim();
-                        country[index]['newRecovered'] = '';
+                        country[index]['newRecovered'] = formatReco(country[index]['country'], country[index]['totalRecovered'])
                         country[index]['seriousCritical'] = $(element).find('td:nth-child(8)').text().trim();
                     }
                 });
@@ -69,6 +70,7 @@ module.exports.scrapdata = function (req, res) {
         })
 }
 
+//1234 -> 1,234
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
@@ -84,5 +86,22 @@ function isEligible(value) {
     }
 }
 
+//new recovery data
+function formatReco(country, nroc) {
+    try {
+        let proc = pr[country].recovery
+        let val = nroc.replace(/\,/g, '') - proc.replace(/\,/g, '')
+        if (isNaN(val) || val == '0') {
+            return ''
+        } else {
+            return `+${formatNumber(val)}`
+        }
+    }
+    catch (e) {
+        return ''
+    }
+}
+
 module.exports.formatNumber = formatNumber
 module.exports.fltr = fltr
+module.exports.formatReco = formatReco

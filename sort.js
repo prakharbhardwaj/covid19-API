@@ -5,6 +5,7 @@ const datascrap = require('./datascrap')
 
 const formatNumber = datascrap.formatNumber
 const fltr = datascrap.fltr
+const formatReco = datascrap.formatReco
 
 module.exports.sortdata = function (req, res) {
     let sortType = req.query.sortby
@@ -47,7 +48,7 @@ module.exports.sortdata = function (req, res) {
                         country[index]['newDeaths'] = $(element).find('td:nth-child(5)').text().trim();
                         country[index]['totalRecovered'] = $(element).find('td:nth-child(6)').text().trim();
                         country[index]['activeCases'] = $(element).find('td:nth-child(7)').text().trim();
-                        country[index]['newRecovered'] = '';
+                        country[index]['newRecovered'] = formatReco(country[index]['country'], country[index]['totalRecovered']);
                         country[index]['seriousCritical'] = $(element).find('td:nth-child(8)').text().trim();
                     }
                 });

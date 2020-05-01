@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 
 const port = process.env.PORT || 1212
+
+const cron = require('./cron')
 const datascrap = require('./datascrap')
 const sorting = require('./sort')
 const searching = require('./search')

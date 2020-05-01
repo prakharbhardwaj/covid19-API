@@ -3,7 +3,9 @@ const cheerio = require("cheerio");
 const fetch = require('node-fetch')
 const datascrap = require('./datascrap')
 const _ = require('lodash')
+
 const formatNumber = datascrap.formatNumber
+const formatReco = datascrap.formatReco
 
 module.exports.searchdata = function (req, res) {
     let qrycountry = req.query.country
@@ -136,7 +138,7 @@ module.exports.searchdata = function (req, res) {
                                     country['newDeaths'] = $(element).find('td:nth-child(5)').text().trim();
                                     country['totalRecovered'] = $(element).find('td:nth-child(6)').text().trim();
                                     country['activeCases'] = $(element).find('td:nth-child(7)').text().trim();
-                                    country['newRecovered'] = ""
+                                    country['newRecovered'] = formatReco(country['country'], country['totalRecovered'])
                                     country['seriousCritical'] = $(element).find('td:nth-child(8)').text().trim();
                                     return true
                                 }
