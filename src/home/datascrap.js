@@ -1,7 +1,7 @@
 const request = require('request');
 const cheerio = require("cheerio");
 const fetch = require('node-fetch')
-const pr = require('./past_recovery.json')
+const pr = require('../past-recovery/past_recovery.json')
 
 module.exports.scrapdata = function (req, res) {
     fetch('https://api.covid19india.org/data.json')

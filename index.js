@@ -4,17 +4,16 @@ const app = express()
 const port = process.env.PORT || 1212
 
 // const cron = require('./cron')
-const datascrap = require('./datascrap')
-const sorting = require('./sort')
-const searching = require('./search')
-const searchV2 = require('./search_v2')
-const india = require('./statewise')
-const news = require('./latest_news')
-const indiaV2 = require('./statewise_v2')
-const recoveryData = require('./past_recovery')
+const datascrap = require('./src/home/datascrap')
+const sorting = require('./src/sort/sort')
+const searching = require('./src/search/search')
+const searchV2 = require('./src/search/search_v2')
+const india = require('./src/india/statewise')
+const news = require('./src/news/latest_news')
+const indiaV2 = require('./src/india/statewise_v2')
+const recoveryData = require('./src/past-recovery/past_recovery')
 
 app.get('/', (req, res) => {
-    // res.send('<h1>Prka</h1>')
     res.send(
         `<h1>covid-19-api</h1>
         <h3>APIs to track the latest COVID-19 data along with other stuff like news, searching and sorting options.</h3>

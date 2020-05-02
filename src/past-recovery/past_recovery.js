@@ -27,7 +27,7 @@ module.exports.scrapdata = function (req, res, next) {
                 }
             });
 
-            fs.writeFile('past_recovery.json', JSON.stringify(past_recovery), function (err) {
+            fs.writeFile('src/past-recovery/past_recovery.json', JSON.stringify(past_recovery), function (err) {
                 if (err) throw err;
                 console.log('Saved!');
             });

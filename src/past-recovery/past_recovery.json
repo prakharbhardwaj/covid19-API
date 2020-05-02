@@ -1,6 +1,6 @@
 {
     "World": {
-        "recovery": "1,080,100"
+        "recovery": "1,080,084"
     },
     "China": {
         "recovery": "77,642"
@@ -339,7 +339,7 @@
         "recovery": "167"
     },
     "Malta": {
-        "recovery": "383"
+        "recovery": "367"
     },
     "Jordan": {
         "recovery": "364"
@@ -512,9 +512,6 @@
     "Syria": {
         "recovery": "27"
     },
-    "Zimbabwe": {
-        "recovery": "5"
-    },
     "Eritrea": {
         "recovery": "26"
     },
@@ -526,6 +523,9 @@
     },
     "Malawi": {
         "recovery": "9"
+    },
+    "Zimbabwe": {
+        "recovery": "5"
     },
     "Angola": {
         "recovery": "11"

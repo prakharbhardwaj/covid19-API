@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const datascrap = require('./datascrap')
+const datascrap = require('../home/datascrap')
 
 const formatNumber = datascrap.formatNumber
 
