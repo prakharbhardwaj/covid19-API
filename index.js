@@ -3,7 +3,7 @@ const app = express()
 
 const port = process.env.PORT || 1212
 
-const cron = require('./cron')
+// const cron = require('./cron')
 const datascrap = require('./datascrap')
 const sorting = require('./sort')
 const searching = require('./search')
@@ -11,6 +11,7 @@ const searchV2 = require('./search_v2')
 const india = require('./statewise')
 const news = require('./latest_news')
 const indiaV2 = require('./statewise_v2')
+const recoveryData = require('./past_recovery')
 
 app.get('/', (req, res) => {
     // res.send('<h1>Prka</h1>')
@@ -27,5 +28,6 @@ app.get('/covid19/news', news.news)
 app.get('/covid19/statewise', india.statewise)
 app.get('/covid19/v2/search', searchV2.searchdata)
 app.get('/covid19/v2/statewise', indiaV2.statewise)
+app.get('/covid19/private/data/recoveryData', recoveryData.scrapdata)
 
 app.listen(port, () => console.log(`App running on http://localhost:${port}`))
