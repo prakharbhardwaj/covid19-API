@@ -32,7 +32,7 @@ module.exports.scrapdata = function (req, res, next) {
                 console.log('Saved!');
             });
 
-            // res.status(200).send(past_recovery)
+            res.status(200).send("Saved Data")
         })
     }
     catch (e) {
