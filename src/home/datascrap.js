@@ -31,26 +31,23 @@ module.exports.scrapdata = function (req, res) {
                 var country = [];
                 var $ = cheerio.load(body);
                 $('div[id="nav-today"]').find('tbody>tr').each(function (index, element) {
-                    const cont = $(element).find('td:nth-child(1)').text().trim()
-                    if (cont == 'North America' || cont == 'Europe' || cont == 'South America' || cont == 'Oceania' || cont == 'Africa' || cont == 'Asia' || cont == '') {
+                    const cont = $(element).find('td:nth-child(2)').text().trim()
+                    if (cont == 'North America' || cont == 'Europe' || cont == 'South America' || cont == 'Oceania' || cont == 'Africa' || cont == 'Asia' || cont == '' || cont == 'Total:') {
                         console.log('Not included')
                     } else {
                         country[index] = {};
-                        country[index]['country'] = $(element).find('td:nth-child(1)').text().trim();
-                        country[index]['totalCases'] = $(element).find('td:nth-child(2)').text().trim();
-                        country[index]['newCases'] = $(element).find('td:nth-child(3)').text().trim();
-                        country[index]['totalDeaths'] = $(element).find('td:nth-child(4)').text().trim();
-                        country[index]['newDeaths'] = $(element).find('td:nth-child(5)').text().trim();
-                        country[index]['totalRecovered'] = $(element).find('td:nth-child(6)').text().trim();
-                        country[index]['activeCases'] = $(element).find('td:nth-child(7)').text().trim();
+                        country[index]['country'] = $(element).find('td:nth-child(2)').text().trim();
+                        country[index]['totalCases'] = $(element).find('td:nth-child(3)').text().trim();
+                        country[index]['newCases'] = $(element).find('td:nth-child(4)').text().trim();
+                        country[index]['totalDeaths'] = $(element).find('td:nth-child(5)').text().trim();
+                        country[index]['newDeaths'] = $(element).find('td:nth-child(6)').text().trim();
+                        country[index]['totalRecovered'] = $(element).find('td:nth-child(7)').text().trim();
+                        country[index]['activeCases'] = $(element).find('td:nth-child(8)').text().trim();
                         country[index]['newRecovered'] = formatReco(country[index]['country'], country[index]['totalRecovered'])
-                        country[index]['seriousCritical'] = $(element).find('td:nth-child(8)').text().trim();
+                        country[index]['seriousCritical'] = $(element).find('td:nth-child(9)').text().trim();
                     }
                 });
                 country = fltr(country)
-                let index = country.findIndex(p => p.country == "Total:")
-                // index += 1
-                country = country.slice(0, index)
 
                 let indiaIndex = country.findIndex(p => p.country == "India")
                 country[indiaIndex] = covid19india

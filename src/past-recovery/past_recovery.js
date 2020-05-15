@@ -15,12 +15,12 @@ module.exports.scrapdata = function (req, res, next) {
 
             var $ = cheerio.load(body);
             $('div[id="nav-yesterday"]').find('tbody>tr').each(function (index, element) {
-                const cont = $(element).find('td:nth-child(1)').text().trim()
+                const cont = $(element).find('td:nth-child(2)').text().trim()
                 if (cont == 'North America' || cont == 'Europe' || cont == 'South America' || cont == 'Oceania' || cont == 'Africa' || cont == 'Asia' || cont == '' || cont == "Total:") {
                     console.log('Not included')
                 } else {
-                    let contry_name = $(element).find('td:nth-child(1)').text().trim();
-                    let recovery = $(element).find('td:nth-child(6)').text().trim();
+                    let contry_name = $(element).find('td:nth-child(2)').text().trim();
+                    let recovery = $(element).find('td:nth-child(7)').text().trim();
                     past_recovery[contry_name] = {
                         "recovery": recovery
                     }
