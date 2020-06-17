@@ -42,9 +42,9 @@ module.exports.scrapdata = function (req, res) {
                         country[index]['totalDeaths'] = $(element).find('td:nth-child(5)').text().trim();
                         country[index]['newDeaths'] = $(element).find('td:nth-child(6)').text().trim();
                         country[index]['totalRecovered'] = $(element).find('td:nth-child(7)').text().trim();
-                        country[index]['activeCases'] = $(element).find('td:nth-child(8)').text().trim();
-                        country[index]['newRecovered'] = formatReco(country[index]['country'], country[index]['totalRecovered'])
-                        country[index]['seriousCritical'] = $(element).find('td:nth-child(9)').text().trim();
+                        country[index]['newRecovered'] = $(element).find('td:nth-child(8)').text().trim();
+                        country[index]['activeCases'] = $(element).find('td:nth-child(9)').text().trim();
+                        country[index]['seriousCritical'] = $(element).find('td:nth-child(10)').text().trim();
                     }
                 });
                 country = fltr(country)
@@ -83,6 +83,7 @@ function isEligible(value) {
     }
 }
 
+/* Depricated
 //new recovery data
 function formatReco(country, nroc) {
     try {
@@ -98,7 +99,8 @@ function formatReco(country, nroc) {
         return ''
     }
 }
+*/
 
 module.exports.formatNumber = formatNumber
 module.exports.fltr = fltr
-module.exports.formatReco = formatReco
+// module.exports.formatReco = formatReco

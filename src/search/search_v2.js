@@ -5,7 +5,7 @@ const datascrap = require('../home/datascrap')
 const _ = require('lodash')
 
 const formatNumber = datascrap.formatNumber
-const formatReco = datascrap.formatReco
+// const formatReco = datascrap.formatReco
 
 module.exports.searchdata = function (req, res) {
     let qrycountry = req.query.country
@@ -137,9 +137,9 @@ module.exports.searchdata = function (req, res) {
                                     country['totalDeaths'] = $(element).find('td:nth-child(5)').text().trim();
                                     country['newDeaths'] = $(element).find('td:nth-child(6)').text().trim();
                                     country['totalRecovered'] = $(element).find('td:nth-child(7)').text().trim();
-                                    country['activeCases'] = $(element).find('td:nth-child(8)').text().trim();
-                                    country['newRecovered'] = formatReco(country['country'], country['totalRecovered'])
-                                    country['seriousCritical'] = $(element).find('td:nth-child(9)').text().trim();
+                                    country['newRecovered'] = $(element).find('td:nth-child(8)').text().trim();
+                                    country['activeCases'] = $(element).find('td:nth-child(9)').text().trim();
+                                    country['seriousCritical'] = $(element).find('td:nth-child(10)').text().trim();
                                     return true
                                 }
                             });
