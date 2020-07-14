@@ -23,6 +23,15 @@ module.exports.statewise = function statewise(req, res) {
                     state[index]['newRecovered'] = formatNumber(`+${$[index].deltarecovered}`)
                     state[index]['seriousCritical'] = ''
                 }
+                state.sort((a, b) => {
+                    var keyA = a.totalCases.replace(/\,/g, '')
+                    var keyB = b.totalCases.replace(/\,/g, '')
+                    keyA = parseInt(keyA, 10)
+                    keyB = parseInt(keyB, 10)
+                    if (keyA > keyB) return -1;
+                    if (keyA < keyB) return 1;
+                    return 0;
+                })
                 state.push(state.shift())
                 res.status(200).send(state)
             })
