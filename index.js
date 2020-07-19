@@ -13,6 +13,7 @@ const news = require('./src/news/latest_news')
 const indiaV2 = require('./src/india/statewise_v2')
 const recoveryData = require('./src/past-recovery/past_recovery')
 const update = require('./src/update/mobile_update')
+const pastData = require('./src/sort/yesterday-data')
 
 app.get('/', (req, res) => {
     res.send(
@@ -29,6 +30,7 @@ app.get('/covid19/statewise', india.statewise)
 app.get('/covid19/v2/search', searchV2.searchdata)
 app.get('/covid19/v2/statewise', indiaV2.statewise)
 app.get('/covid19/private/data/recoveryData', recoveryData.scrapdata)
+app.get('/covid19/pastData', pastData)
 app.get('/covid19/ios/update', update.checkUpdate)
 
 app.listen(port, () => console.log(`App running on http://localhost:${port}`))
