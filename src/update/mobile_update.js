@@ -1,7 +1,7 @@
 module.exports.checkUpdate = function (req, res) {
     let ver = req.query.version
     console.log(ver)
-    const latest_ver = 1.4
+    const latest_ver = 1.5
     if (ver >= latest_ver) {
         res.status(200).send({
             status: true,
