@@ -11,7 +11,7 @@ module.exports.checkUpdate = function (req, res) {
         res.status(200).send({
             status: false,
             message: `A new version of CORONA Tracker is available. Please update to version ${latest_ver} now`,
-            url: 'https://i.diawi.com/e968bm'
+            url: 'https://i.diawi.com/JrqYDo'
         })
     }
 }
