@@ -9,11 +9,10 @@ module.exports.news = (req, res) => {
             .then(res => res.json())
             .then(json => {
                 let $ = json
-                    .slice(-5)
                     .reverse()
                 for (index in $) {
                     latestNews[index] = {}
-                    latestNews[index]['update'] = $[index].update.replace('\n', ' ');
+                    latestNews[index]['update'] = $[index].update
                     latestNews[index]['time'] =
                         formatDistance(
                             new Date($[index].timestamp * 1000),
