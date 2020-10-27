@@ -1,6 +1,8 @@
 const express = require('express')
+const ip = require('ip')
 const app = express()
 
+const ipAddr = ip.address()
 const port = process.env.PORT || 1212
 
 // const cron = require('./cron')
@@ -33,4 +35,4 @@ app.get('/covid19/private/data/recoveryData', recoveryData.scrapdata)
 app.get('/covid19/pastData', pastData)
 app.get('/covid19/ios/update', update.checkUpdate)
 
-app.listen(port, () => console.log(`App running on http://localhost:${port}`))
+app.listen(port, () => console.log(`App running on http://${ipAddr}:${port}`))
