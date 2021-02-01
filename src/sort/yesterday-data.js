@@ -61,7 +61,7 @@ module.exports = (req, res) => {
           let keyB = parseInt(b.totalCases.replace(/\,/g, ""), 10);
           return keyB - keyA;
         });
-        country.shift();
+        country.push(country.shift());
         res.status(200).send(country);
       }
     );

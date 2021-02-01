@@ -96,7 +96,7 @@ const getWorldData = async () => {
           return keyB - keyA;
         });
 
-        country.shift();
+        country.push(country.shift());
         data = country;
       });
 
