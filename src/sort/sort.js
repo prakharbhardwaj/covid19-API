@@ -13,18 +13,20 @@ module.exports.sortdata = async (req, res) => {
         break;
       case "deaths":
         data.sort((a, b) => {
-          let keyA = parseInt(a.totalDeaths.replace(/\,/g, ""), 10);
-          let keyB = parseInt(b.totalDeaths.replace(/\,/g, ""), 10);
+          let keyA = parseInt(a.totalDeaths.replace(/\,/g, ""), 10) || 0;
+          let keyB = parseInt(b.totalDeaths.replace(/\,/g, ""), 10) || 0;
           return keyB - keyA;
         });
+        data.push(data.shift());
         res.json(data);
         break;
       case "recovers":
         data.sort((a, b) => {
-          let keyA = parseInt(a.totalRecovered.replace(/\,/g, ""), 10);
-          let keyB = parseInt(b.totalRecovered.replace(/\,/g, ""), 10);
+          let keyA = parseInt(a.totalRecovered.replace(/\,/g, ""), 10 || 0);
+          let keyB = parseInt(b.totalRecovered.replace(/\,/g, ""), 10) || 0;
           return keyB - keyA;
         });
+        data.push(data.shift());
         res.json(data);
         break;
       case "newcases":
@@ -33,6 +35,7 @@ module.exports.sortdata = async (req, res) => {
           let keyB = parseInt(b.newCases.replace(/\,/g, ""), 10) || 0;
           return keyB - keyA;
         });
+        data.push(data.shift());
         res.json(data);
         break;
       default:
