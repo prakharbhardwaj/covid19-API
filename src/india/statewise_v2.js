@@ -41,7 +41,7 @@ const getStatesData = async () => {
           return keyB - keyA;
         });
 
-        state.shift();
+        state.push(state.shift());
         data = state;
       });
 
