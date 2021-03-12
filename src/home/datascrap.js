@@ -112,14 +112,8 @@ const formatNumber = (num) => {
 };
 
 const fltr = (arr) => {
-  arr = arr.filter(isEligible);
+  arr = arr.filter(Boolean);
   return arr;
-};
-
-const isEligible = (value) => {
-  if (value !== false || value !== null || value !== 0 || value !== "") {
-    return value;
-  }
 };
 
 module.exports = {
