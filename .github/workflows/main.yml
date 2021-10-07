@@ -5,27 +5,8 @@ on:
     branches: [master]
 
 jobs:
-  connect-open-vpn:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Open VPN
-        run: sudo apt-get install openvpn -y
-      - name: Connect VPN
-        uses: golfzaptw/action-connect-ovpn@master
-        id: connect_vpn
-        with:
-          PING_URL: "127.0.0.1"
-          FILE_OVPN: ".github/vpn/config.ovpn"
-        env:
-          CA_CRT: ${{ secrets.CA_CRT}}
-          USER_CRT: ${{ secrets.USER_CRT }}
-          USER_KEY: ${{ secrets.USER_KEY }}
-      - name: Check Connect VPN
-        run: echo ${{ steps.connect_vpn.outputs.STATUS }}
   #First we will see the application build or not , then we will deploy in EC2
   build:
-    needs: connect-open-vpn
     runs-on: ubuntu-20.04
 
     steps:
