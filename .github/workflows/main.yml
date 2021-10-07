@@ -1,22 +1,31 @@
+name: covid-19
+
+on:
+  push:
+    branches: [master]
+
+jobs:
   connect-open-vpn:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install Open VPN
-        run: sudo apt-get install openvpn
-      - name: Connect VPN
-        uses: golfzaptw/action-connect-ovpn@master
-        id: connect_vpn
-        with:
-          PING_URL: '127.0.0.1'
-          FILE_OVPN: '.github/vpn/config.ovpn'
-          TLS_KEY: ${{ secrets.TLS_KEY }}
-        env:
-          CA_CRT: ${{ secrets.CA_CRT}}
-          USER_CRT: ${{ secrets.USER_CRT }}
-          USER_KEY: ${{ secrets.USER_KEY }}
-      - name: Check Connect VPN
-        run: echo ${{ steps.connect_vpn.outputs.STATUS }}
-      - name: kill vpn
-        if: always()
-        run: sudo killall openvpn
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v1
+    - name: Install Open VPN
+      run: sudo apt-get install openvpn
+    - name: Connect VPN
+      uses: golfzaptw/action-connect-ovpn@master
+      id: connect_vpn
+      with:
+        PING_URL: '127.0.0.1'
+        FILE_OVPN: '.github/vpn/config.ovpn'
+        TLS_KEY: ${{ secrets.TLS_KEY }}
+      env:
+        CA_CRT: ${{ secrets.CA_CRT}}
+        USER_CRT: ${{ secrets.USER_CRT }}
+        USER_KEY: ${{ secrets.USER_KEY }}
+    - name: Check Connect VPN
+      run: echo ${{ steps.connect_vpn.outputs.STATUS }}
+    - name: kill vpn
+      if: always()
+      run: sudo killall openvpn
+
+
